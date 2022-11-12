@@ -1,5 +1,5 @@
 const { Schema, model } = require('mongoose');
-const channelSchema = require('./Channel');
+const {thoughtSchema} = require('./Thoughts');
 
 // Schema to create User model
 const userSchema = new Schema(
@@ -19,14 +19,13 @@ const userSchema = new Schema(
       required: true,
       max_length: 50,
     },
-    thoughts: [channelSchema],
-  },
-  {
+    
     toJSON: {
-      getters: true,
+      getters:false,
     },
-  }
+  },
 );
+userSchema.add({thoughts:[thoughtSchema]});
 
 const User = model('user', userSchema);
 
